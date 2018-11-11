@@ -7,10 +7,11 @@ public class main implements Runnable {
 	public int[] Philosophers = new int[] {1,2,3,4,5};
 	public boolean think = true;
 	public int[] sticks = new int[] {1,1,1,1,1};
-	private boolean eat = false;
-	public boolean rightStick, leftStick = false;
+	private boolean eat ;
+	public boolean rightStick, leftStick;
 	int left_stick, right_stick = 0;
 	int time = 999;
+	Thread t;
 	
 	public void takeChopStick(int phil) { // pass in which philosopher, his position around the table
 			//phil=phil-1;
@@ -198,11 +199,23 @@ public class main implements Runnable {
 		}
 	}
 	
+	public void start () {
+	      System.out.println("Starting " );
+	      if (t == null) {
+	         t = new Thread (this);
+	         t.start ();
+	      }
+	   }
+
+	
 	public static void main (String args[] ){
 		
 		//System.out.println("test");
 		main phil = new main();
-		phil.run();
+		main phil2 = new main();
+		//phil.run();
+		phil.start();
+		phil2.start();
 }
 
 }
